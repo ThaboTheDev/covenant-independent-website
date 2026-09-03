@@ -1,0 +1,449 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Learner Registration</title>
+    <link rel="stylesheet" href="css/global.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Student Admission Application</h1>
+
+      <form id="parentForm">
+        <input type="hidden" name="role" value="Learner_And_Parent" />
+
+        <h2>Part A: Learner Information</h2>
+
+        <h3>1. Learner Identity</h3>
+        <div class="grid-2">
+          <div class="form-group">
+            <label>First Names *</label>
+            <span class="help-text">Exactly as on the birth certificate</span>
+            <input type="text" name="learner_first_names" required />
+          </div>
+          <div class="form-group">
+            <label>Surname *</label>
+            <input type="text" name="learner_surname" required />
+          </div>
+          <div class="form-group">
+            <label>Preferred Name</label>
+            <input type="text" name="learner_preferred_name" />
+          </div>
+          <div class="form-group">
+            <label>Date of Birth *</label>
+            <input type="date" name="learner_dob" required />
+          </div>
+          <div class="form-group">
+            <label>Gender *</label>
+            <select name="learner_gender" required>
+              <option value="">Select...</option>
+              <option value="Female">Female</option>
+              <option value="Male">Male</option>
+              <option value="Other">Other</option>
+              <option value="Prefer not to say">Prefer not to say</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>SA ID Number</label>
+            <span class="help-text">13 digits (Required if SA Citizen)</span>
+            <input
+              type="text"
+              name="learner_sa_id"
+              pattern="[0-9]{13}"
+              title="Must be exactly 13 digits"
+            />
+          </div>
+          <div class="form-group">
+            <label>Passport Number</label>
+            <span class="help-text">Required if no SA ID</span>
+            <input type="text" name="learner_passport" />
+          </div>
+          <div class="form-group">
+            <label>Nationality *</label>
+            <input
+              type="text"
+              name="learner_nationality"
+              value="South African"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label>Home Language *</label>
+            <select name="learner_home_language" required>
+              <option value="">Select...</option>
+              <option value="English">English</option>
+              <option value="Afrikaans">Afrikaans</option>
+              <option value="isiZulu">isiZulu</option>
+              <option value="isiXhosa">isiXhosa</option>
+              <option value="Sepedi">Sepedi</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Religion / Faith (Optional)</label>
+            <input type="text" name="learner_religion" />
+          </div>
+        </div>
+
+        <div class="section-box">
+          <h4>Foreign Nationals Only</h4>
+          <div class="grid-2">
+            <div class="form-group">
+              <label>Passport Issue Country</label>
+              <input type="text" name="learner_passport_country" />
+            </div>
+            <div class="form-group">
+              <label>Permit Number (Study/Asylum/Refugee)</label>
+              <input type="text" name="learner_permit_number" />
+            </div>
+            <div class="form-group">
+              <label>Permit Expiry Date</label>
+              <input type="date" name="learner_permit_expires" />
+            </div>
+          </div>
+        </div>
+
+        <h3>2. Schooling History</h3>
+        <div class="grid-2">
+          <div class="form-group" style="grid-column: 1 / -1">
+            <label>Current / Previous School *</label>
+            <span class="help-text"
+              >Write "None" if this is their first school</span
+            >
+            <input type="text" name="previous_school" required />
+          </div>
+          <div class="form-group">
+            <label>Current Grade</label>
+            <input type="text" name="previous_grade" />
+          </div>
+          <div class="form-group">
+            <label>Previous School Contact (Phone/Email)</label>
+            <input type="text" name="previous_school_contact" />
+          </div>
+          <div class="form-group" style="grid-column: 1 / -1">
+            <label>Reason for leaving current school</label>
+            <input type="text" name="reason_for_leaving" />
+          </div>
+          <div class="form-group" style="grid-column: 1 / -1">
+            <label>Repeated Grades?</label>
+            <span class="help-text"
+              >Has the child repeated any grade? If so, which and when? (Write
+              "No" if none)</span
+            >
+            <input type="text" name="repeated_grades" />
+          </div>
+        </div>
+
+        <h3>3. Address & Family</h3>
+        <div class="grid-2">
+          <div class="form-group" style="grid-column: 1 / -1">
+            <label>Street Address *</label>
+            <input type="text" name="learner_address" required />
+          </div>
+          <div class="form-group">
+            <label>Suburb *</label>
+            <input type="text" name="learner_suburb" required />
+          </div>
+          <div class="form-group">
+            <label>City / Town *</label>
+            <input
+              type="text"
+              name="learner_city"
+              value="Johannesburg"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label>Postal Code</label>
+            <input type="text" name="learner_postal_code" pattern="[0-9]{4}" />
+          </div>
+          <div class="form-group">
+            <label>Who does the child live with? *</label>
+            <select name="lives_with" required>
+              <option value="">Select...</option>
+              <option value="Both parents">Both parents</option>
+              <option value="Mother">Mother</option>
+              <option value="Father">Father</option>
+              <option value="Guardian">Guardian</option>
+              <option value="Grandparent">Grandparent</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+          <div class="form-group" style="grid-column: 1 / -1">
+            <label>Siblings at School *</label>
+            <span class="help-text"
+              >Do you have other children at Covenant, or applying at the same
+              time? (Include names and grades)</span
+            >
+            <input type="text" name="siblings_at_school" required />
+          </div>
+        </div>
+
+        <h3>4. Health and Support</h3>
+        <p class="help-text" style="margin-bottom: 1rem">
+          This information is kept strictly confidential and used only for the
+          child's safety and support planning.
+        </p>
+        <div class="grid-2">
+          <div class="form-group">
+            <label>Allergies *</label>
+            <span class="help-text"
+              >Describe reaction. Write "None" if none.</span
+            >
+            <textarea name="allergies" required></textarea>
+          </div>
+          <div class="form-group">
+            <label>Chronic Conditions *</label>
+            <span class="help-text"
+              >Asthma, epilepsy, diabetes, etc. Write "None" if none.</span
+            >
+            <textarea name="chronic_conditions" required></textarea>
+          </div>
+          <div class="form-group">
+            <label>Regular Medication</label>
+            <textarea name="medication"></textarea>
+          </div>
+          <div class="form-group">
+            <label>Barriers to Learning / Diagnoses</label>
+            <textarea name="barriers_to_learning"></textarea>
+          </div>
+          <div class="form-group">
+            <label>Dietary Requirements</label>
+            <input type="text" name="dietary_requirements" />
+          </div>
+          <div class="form-group">
+            <label>Disability / Assistive Devices</label>
+            <input type="text" name="disability_support" />
+          </div>
+
+          <div class="form-group">
+            <label>Family Doctor Name</label>
+            <input type="text" name="doctor_name" />
+          </div>
+          <div class="form-group">
+            <label>Doctor Telephone</label>
+            <input type="tel" name="doctor_phone" />
+          </div>
+          <div class="form-group">
+            <label>Medical Aid Name</label>
+            <input type="text" name="medical_aid_name" />
+          </div>
+          <div class="form-group">
+            <label>Medical Aid Number</label>
+            <input type="text" name="medical_aid_number" />
+          </div>
+          <div class="form-group" style="grid-column: 1 / -1">
+            <label>Main Member Name & ID</label>
+            <input type="text" name="medical_aid_main_member" />
+          </div>
+        </div>
+
+        <!-- ========================================== -->
+        <!-- SECTION B: PARENT INFORMATION              -->
+        <!-- ========================================== -->
+        <h2>Part B: Parent / Guardian Information</h2>
+
+        <h3>1. Identity and Contact</h3>
+        <div class="grid-2">
+          <div class="form-group">
+            <label>Relationship to Child *</label>
+            <select name="parent_relationship" required>
+              <option value="">Select...</option>
+              <option value="Mother">Mother</option>
+              <option value="Father">Father</option>
+              <option value="Legal Guardian">Legal Guardian</option>
+              <option value="Grandparent">Grandparent</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Title</label>
+            <input type="text" name="parent_title" />
+          </div>
+          <div class="form-group">
+            <label>First Names *</label>
+            <input type="text" name="parent_first_names" required />
+          </div>
+          <div class="form-group">
+            <label>Surname *</label>
+            <input type="text" name="parent_surname" required />
+          </div>
+          <div class="form-group">
+            <label>SA ID Number</label>
+            <span class="help-text">13 digits required if SA Citizen</span>
+            <input type="text" name="parent_sa_id_number" pattern="[0-9]{13}" />
+          </div>
+          <div class="form-group">
+            <label>Passport Number</label>
+            <span class="help-text">Required if no SA ID</span>
+            <input type="text" name="parent_passport_number" />
+          </div>
+          <div class="form-group">
+            <label>Mobile Number *</label>
+            <input
+              type="tel"
+              name="parent_mobile"
+              pattern="[0-9]{10}"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label>Email Address *</label>
+            <input type="email" name="email" required />
+          </div>
+          <div class="form-group" style="grid-column: 1 / -1">
+            <label>Employer & Work Address</label>
+            <input type="text" name="parent_employer" />
+          </div>
+        </div>
+
+        <h3>2. Rights and Responsibilities</h3>
+        <div class="grid-2">
+          <div class="form-group">
+            <label>Do you hold legal custody? *</label>
+            <select name="has_legal_custody" required>
+              <option value="">Select...</option>
+              <option value="Yes">Yes</option>
+              <option value="No">No</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Are you the primary point of contact? *</label>
+            <select name="is_primary_contact" required>
+              <option value="">Select...</option>
+              <option value="Yes">Yes</option>
+              <option value="No">No</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>May you collect the child from school? *</label>
+            <select name="may_collect" required>
+              <option value="">Select...</option>
+              <option value="Yes">Yes</option>
+              <option value="No">No</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Are you responsible for school fees? *</label>
+            <select name="is_fee_payer" required>
+              <option value="">Select...</option>
+              <option value="Yes">Yes</option>
+              <option value="No">No</option>
+            </select>
+          </div>
+        </div>
+
+        <h3>3. Additional Emergency Contact</h3>
+        <p class="help-text" style="margin-bottom: 1rem">
+          Please list an adult who is NOT a parent that we can contact if you
+          are unreachable.
+        </p>
+        <div class="grid-2">
+          <div class="form-group">
+            <label>Contact Name *</label>
+            <input type="text" name="emergency_name" required />
+          </div>
+          <div class="form-group">
+            <label>Relationship to Child *</label>
+            <input type="text" name="emergency_relationship" required />
+          </div>
+          <div class="form-group">
+            <label>Contact Telephone *</label>
+            <input
+              type="tel"
+              name="emergency_phone"
+              pattern="[0-9]{10}"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label>May this person collect the child? *</label>
+            <select name="emergency_may_collect" required>
+              <option value="">Select...</option>
+              <option value="Yes">Yes</option>
+              <option value="No">No</option>
+            </select>
+          </div>
+        </div>
+
+        <h3>4. Legal Declarations & Consents</h3>
+
+        <div class="checkbox-group">
+          <input
+            type="checkbox"
+            id="popia"
+            name="popia_consent"
+            value="Granted"
+            required
+          />
+          <label class="checkbox-label" for="popia"
+            ><strong>POPIA Consent:</strong> I consent to the school processing
+            my child's and my personal information for admission, care, and
+            legal reporting. *</label
+          >
+        </div>
+
+        <div class="checkbox-group">
+          <input
+            type="checkbox"
+            id="truth"
+            name="truth_declaration"
+            value="Granted"
+            required
+          />
+          <label class="checkbox-label" for="truth"
+            ><strong>Declaration of Truth:</strong> I declare the information
+            given is true and complete. I understand a false statement may void
+            the enrolment. *</label
+          >
+        </div>
+
+        <div class="checkbox-group">
+          <input
+            type="checkbox"
+            id="conduct"
+            name="code_of_conduct"
+            value="Granted"
+            required
+          />
+          <label class="checkbox-label" for="conduct"
+            ><strong>Policies:</strong> I have read and accept the code of
+            conduct and the fee policy. *</label
+          >
+        </div>
+
+        <div class="grid-2">
+          <div class="form-group">
+            <label>Consent to Emergency Medical Treatment *</label>
+            <select name="emergency_treatment_consent" required>
+              <option value="">Select...</option>
+              <option value="Yes">Yes</option>
+              <option value="No">No</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Consent to Photo/Media use</label>
+            <select name="photo_media_consent">
+              <option value="Yes">Yes</option>
+              <option value="No">No</option>
+            </select>
+          </div>
+        </div>
+
+        <button type="submit">Submit Secure Registration</button>
+      </form>
+
+      <div id="statusMessage" class="hidden"></div>
+      <div class="center-text" style="margin-top: 2rem">
+        <a
+          href="index.html"
+          style="color: var(--primary); text-decoration: none"
+          >← Back to Start</a
+        >
+      </div>
+    </div>
+
+    <script src="js/submit.js"></script>
+  </body>
+</html>

@@ -1,0 +1,32 @@
+# AWS SAM Build & Deployment
+.aws-sam/
+packaged.yaml
+.aws/
+
+# Python Caches & Virtual Environments
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+env/
+.venv/
+.env
+
+# OS Generated Files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# IDEs and Editors
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Cloudflare / Frontend Logs
+*.log
+.npm/

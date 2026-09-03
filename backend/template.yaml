@@ -1,0 +1,68 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: Streamlined Serverless School Registration Backend (Text Only)
+
+Globals:
+  Function:
+    Timeout: 3
+    MemorySize: 256
+    Runtime: python3.14
+    Architectures:
+      - x86_64
+    Environment:
+      Variables:
+        TABLE_NAME: !Ref RegistrationTable
+
+Resources:
+  # 1. Database (On-Demand Capacity for high concurrency)
+  RegistrationTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: SchoolRegistrations
+      BillingMode: PAY_PER_REQUEST
+      AttributeDefinitions:
+        - AttributeName: pk
+          AttributeType: S
+        - AttributeName: sk
+          AttributeType: S
+      KeySchema:
+        - AttributeName: pk
+          KeyType: HASH
+        - AttributeName: sk
+          KeyType: RANGE
+
+  # 2. HTTP API Gateway (Handles routing and CORS)
+  RegistrationApi:
+    Type: AWS::Serverless::HttpApi
+    Properties:
+      CorsConfiguration:
+        AllowOrigins:
+          - "*"
+        AllowHeaders:
+          - "*"
+        AllowMethods:
+          - POST
+          - OPTIONS
+        MaxAge: 3000
+
+  # 3. The Single Lambda Handler
+  RegisterFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: src/
+      Handler: app.register_handler
+      Policies:
+        - DynamoDBCrudPolicy:
+            TableName: !Ref RegistrationTable
+      Events:
+        PostRegistration:
+          Type: HttpApi
+          Properties:
+            ApiId: !Ref RegistrationApi
+            Path: /register
+            Method: POST
+
+Outputs:
+  ApiEndpoint:
+    Description: "Your API Base URL for the Frontend"
+    Value: !Sub "https://${RegistrationApi}.execute-api.${AWS::Region}.amazonaws.com"
