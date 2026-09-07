@@ -1,325 +1,148 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Teacher Registration</title>
-    <link rel="stylesheet" href="css/global.css" />
-  </head>
-  <body>
-    <div class="container">
-      <h1>Teacher Employment Application</h1>
-      <form id="teacherForm">
-        <input type="hidden" name="role" value="Teacher" />
-        <h2>1. Identity & Contact</h2>
-        <div class="grid-2">
-          <div class="form-group">
-            <label>Title</label>
-            <select name="title">
-              <option value="">Select...</option>
-              <option value="Mr">Mr</option>
-              <option value="Mrs">Mrs</option>
-              <option value="Ms">Ms</option>
-              <option value="Dr">Dr</option>
-              <option value="Prof">Prof</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label>First Names *</label
-            ><span class="help-text">Exactly as on your ID</span
-            ><input type="text" name="first_names" required />
-          </div>
-          <div class="form-group">
-            <label>Surname *</label
-            ><input type="text" name="surname" required />
-          </div>
-          <div class="form-group">
-            <label>Date of Birth *</label
-            ><input type="date" name="dob" required />
-          </div>
-          <div class="form-group">
-            <label>Gender</label>
-            <select name="gender">
-              <option value="">Select...</option>
-              <option value="Female">Female</option>
-              <option value="Male">Male</option>
-              <option value="Other">Other</option>
-              <option value="Prefer not to say">Prefer not to say</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label>SA ID Number</label
-            ><span class="help-text">Required if SA Citizen</span
-            ><input type="text" name="sa_id_number" pattern="[0-9]{13}" />
-          </div>
-          <div class="form-group">
-            <label>Passport Number</label
-            ><span class="help-text">Required if Foreign National</span
-            ><input type="text" name="passport_number" />
-          </div>
-          <div class="form-group">
-            <label>Nationality *</label
-            ><input
-              type="text"
-              name="nationality"
-              value="South African"
-              required
-            />
-          </div>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employment Application | Covenant Private School</title>
+    <link rel="stylesheet" href="css/global.css">
+</head>
+<body>
 
-          <div
-            class="form-group"
-            style="
-              grid-column: 1 / -1;
-              padding: 1rem;
-              border: 1px dashed var(--border);
-              border-radius: 6px;
-            "
-          >
-            <label style="color: #991b1b">Foreign Nationals Only</label>
-            <div class="grid-2" style="margin-top: 0.5rem">
-              <div>
-                <label class="help-text"
-                  >Work Permit / Critical Skills Visa Number</label
-                ><input type="text" name="work_permit_number" />
-              </div>
-              <div>
-                <label class="help-text">Permit Expiry Date</label
-                ><input type="date" name="work_permit_expires" />
-              </div>
-            </div>
-          </div>
+    <div>
+        <main class="container">
+            
+            <header class="center-text" style="margin-bottom: 3rem;">
+                <img src="img/logo.png" alt="Covenant Private School Crest" class="brand-logo">
+                <h1>Staff Employment Application</h1>
+                <p style="color: var(--text-muted); font-size: 0.95rem;">Please complete the professional application form below.</p>
+            </header>
+            
+            <form id="teacherForm">
+                <input type="hidden" name="role" value="Teacher">
 
-          <div class="form-group">
-            <label>Email Address *</label
-            ><input type="email" name="email" required />
-          </div>
-          <div class="form-group">
-            <label>Mobile Number *</label
-            ><input type="tel" name="mobile" pattern="[0-9]{10}" required />
-          </div>
-          <div class="form-group">
-            <label>Alternative Telephone</label
-            ><input type="tel" name="alt_phone" />
-          </div>
-          <div class="form-group" style="grid-column: 1 / -1">
-            <label>Home Address *</label
-            ><input type="text" name="residential_address" required />
-          </div>
-        </div>
+                <h2>1. Identity & Contact</h2>
+                <div class="grid-2">
+                    <div class="form-group"><label>Title</label>
+                        <select name="title">
+                            <option value="">Select...</option><option value="Mr">Mr</option><option value="Mrs">Mrs</option><option value="Ms">Ms</option><option value="Dr">Dr</option><option value="Prof">Prof</option>
+                        </select>
+                    </div>
+                    <div class="form-group"><label>First Names *</label><span class="help-text">Exactly as on your ID</span><input type="text" name="first_names" required></div>
+                    <div class="form-group"><label>Surname *</label><input type="text" name="surname" required></div>
+                    <div class="form-group"><label>Date of Birth *</label><input type="date" name="dob" required></div>
+                    <div class="form-group"><label>Gender</label>
+                        <select name="gender">
+                            <option value="">Select...</option><option value="Female">Female</option><option value="Male">Male</option><option value="Other">Other</option><option value="Prefer not to say">Prefer not to say</option>
+                        </select>
+                    </div>
+                    <div class="form-group"><label>SA ID Number</label><span class="help-text">Required if SA Citizen</span><input type="text" name="sa_id_number" pattern="[0-9]{13}"></div>
+                    <div class="form-group"><label>Passport Number</label><span class="help-text">Required if Foreign National</span><input type="text" name="passport_number"></div>
+                    <div class="form-group"><label>Nationality *</label><input type="text" name="nationality" value="South African" required></div>
+                    
+                    <div class="form-group section-box" style="grid-column: 1 / -1; margin-top: 0;">
+                        <h3 style="margin-top: 0; color: #991b1b;">Foreign Nationals Only</h3>
+                        <div class="grid-2">
+                            <div><label>Work Permit / Critical Skills Visa Number</label><input type="text" name="work_permit_number"></div>
+                            <div><label>Permit Expiry Date</label><input type="date" name="work_permit_expires"></div>
+                        </div>
+                    </div>
 
-        <h2>2. Professional Registration</h2>
-        <div class="grid-2">
-          <div class="form-group">
-            <label>SACE Registration Number *</label
-            ><input type="text" name="sace_number" required />
-          </div>
-          <div class="form-group">
-            <label>SACE Registration Type *</label>
-            <select name="sace_registration_type" required>
-              <option value="">Select...</option>
-              <option value="Full">Full</option>
-              <option value="Provisional">Provisional</option>
-              <option value="Conditional">Conditional</option>
-              <option value="Application pending">Application pending</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label>SACE Expiry / Renewal Date</label
-            ><input type="date" name="sace_expiry" />
-          </div>
-        </div>
+                    <div class="form-group"><label>Email Address *</label><input type="email" name="email" required></div>
+                    <div class="form-group"><label>Mobile Number *</label><input type="tel" name="mobile" pattern="[0-9]{10}" required></div>
+                    <div class="form-group"><label>Alternative Telephone</label><input type="tel" name="alt_phone"></div>
+                    <div class="form-group" style="grid-column: 1 / -1;"><label>Home Address *</label><input type="text" name="residential_address" required></div>
+                </div>
 
-        <h2>3. Qualifications</h2>
-        <div class="grid-2">
-          <div class="form-group" style="grid-column: 1 / -1">
-            <label>Highest Teaching Qualification *</label
-            ><input type="text" name="highest_qualification" required />
-          </div>
-          <div class="form-group">
-            <label>Institution and Year Completed *</label
-            ><input type="text" name="qualification_institution" required />
-          </div>
-          <div class="form-group">
-            <label>NQF Level</label
-            ><input type="number" name="nqf_level" min="4" max="10" />
-          </div>
-          <div class="form-group">
-            <label>REQV Level (if known)</label
-            ><input type="number" name="reqv_level" min="10" max="17" />
-          </div>
-          <div class="form-group">
-            <label>SAQA Evaluation Number</label
-            ><span class="help-text">For foreign qualifications</span
-            ><input type="text" name="saqa_evaluation" />
-          </div>
-          <div class="form-group" style="grid-column: 1 / -1">
-            <label>Other Qualifications / Short Courses</label
-            ><textarea name="other_qualifications"></textarea>
-          </div>
-        </div>
+                <h2>2. Professional Registration</h2>
+                <div class="grid-2">
+                    <div class="form-group"><label>SACE Registration Number *</label><input type="text" name="sace_number" required></div>
+                    <div class="form-group"><label>SACE Registration Type *</label>
+                        <select name="sace_registration_type" required>
+                            <option value="">Select...</option><option value="Full">Full</option><option value="Provisional">Provisional</option><option value="Conditional">Conditional</option><option value="Application pending">Application pending</option>
+                        </select>
+                    </div>
+                    <div class="form-group"><label>SACE Expiry / Renewal Date</label><input type="date" name="sace_expiry"></div>
+                </div>
 
-        <h2>4. Teaching Profile</h2>
-        <div class="grid-2">
-          <div class="form-group">
-            <label>Total Years Teaching Experience *</label
-            ><input type="number" name="years_experience" required min="0" />
-          </div>
-          <div class="form-group">
-            <label>Phases Qualified to Teach *</label>
-            <select
-              name="phases_qualified"
-              required
-              multiple
-              style="height: 100px"
-            >
-              <option value="Nursery">Nursery</option>
-              <option value="Foundation">Foundation</option>
-              <option value="Intermediate">Intermediate</option>
-              <option value="Senior">Senior</option>
-              <option value="FET">FET</option>
-            </select>
-          </div>
-          <div class="form-group" style="grid-column: 1 / -1">
-            <label>Subjects Qualified (and Grades) *</label
-            ><textarea name="subjects_qualified" required></textarea>
-          </div>
-          <div class="form-group">
-            <label>Languages of Instruction</label
-            ><input
-              type="text"
-              name="languages_of_instruction"
-              placeholder="e.g. English, Afrikaans"
-            />
-          </div>
-          <div class="form-group">
-            <label>Curriculum Experience</label
-            ><input
-              type="text"
-              name="curriculum_experience"
-              placeholder="e.g. CAPS, IEB, Cambridge"
-            />
-          </div>
-          <div class="form-group" style="grid-column: 1 / -1">
-            <label>Additional Skills (Coaching, IT, First Aid)</label
-            ><textarea name="additional_skills"></textarea>
-          </div>
-          <div class="form-group">
-            <label>Driving Licence Code</label
-            ><input type="text" name="drivers_licence" />
-          </div>
-        </div>
+                <h2>3. Qualifications</h2>
+                <div class="grid-2">
+                    <div class="form-group" style="grid-column: 1 / -1;"><label>Highest Teaching Qualification *</label><input type="text" name="highest_qualification" required></div>
+                    <div class="form-group"><label>Institution and Year Completed *</label><input type="text" name="qualification_institution" required></div>
+                    <div class="form-group"><label>NQF Level</label><input type="number" name="nqf_level" min="4" max="10"></div>
+                    <div class="form-group"><label>REQV Level (if known)</label><input type="number" name="reqv_level" min="10" max="17"></div>
+                    <div class="form-group"><label>SAQA Evaluation Number</label><span class="help-text">For foreign qualifications</span><input type="text" name="saqa_evaluation"></div>
+                    <div class="form-group" style="grid-column: 1 / -1;"><label>Other Qualifications / Short Courses</label><textarea name="other_qualifications"></textarea></div>
+                </div>
 
-        <h2>5. Employment History</h2>
-        <div class="grid-2">
-          <div class="form-group">
-            <label>Current Employer and Position *</label
-            ><input type="text" name="current_employer" required />
-          </div>
-          <div class="form-group">
-            <label>Notice Period *</label
-            ><input type="text" name="current_notice_period" required />
-          </div>
-          <div class="form-group">
-            <label>Earliest Start Date *</label
-            ><input type="date" name="earliest_start_date" required />
-          </div>
-          <div class="form-group">
-            <label>Salary Expectation (ZAR)</label
-            ><input type="number" name="salary_expectation" />
-          </div>
-          <div class="form-group" style="grid-column: 1 / -1">
-            <label>Employment History (Last 10 Years) *</label>
-            <span class="help-text"
-              >List employer, role, dates, reason for leaving. Please explain
-              any gaps >3 months.</span
-            >
-            <textarea
-              name="employment_history"
-              required
-              style="height: 120px"
-            ></textarea>
-          </div>
-          <div class="form-group" style="grid-column: 1 / -1">
-            <label>Motivation: Why Covenant?</label
-            ><textarea name="motivation"></textarea>
-          </div>
-        </div>
+                <h2>4. Teaching Profile</h2>
+                <div class="grid-2">
+                    <div class="form-group"><label>Total Years Teaching Experience *</label><input type="number" name="years_experience" required min="0"></div>
+                    <div class="form-group"><label>Phases Qualified to Teach *</label>
+                        <select name="phases_qualified" required multiple style="height: 120px;">
+                            <option value="Nursery">Nursery</option><option value="Foundation">Foundation</option><option value="Intermediate">Intermediate</option><option value="Senior">Senior</option><option value="FET">FET</option>
+                        </select>
+                    </div>
+                    <div class="form-group" style="grid-column: 1 / -1;"><label>Subjects Qualified (and Grades) *</label><textarea name="subjects_qualified" required></textarea></div>
+                    <div class="form-group"><label>Languages of Instruction</label><input type="text" name="languages_of_instruction" placeholder="e.g. English, Afrikaans"></div>
+                    <div class="form-group"><label>Curriculum Experience</label><input type="text" name="curriculum_experience" placeholder="e.g. CAPS, IEB, Cambridge"></div>
+                    <div class="form-group" style="grid-column: 1 / -1;"><label>Additional Skills (Coaching, IT, First Aid)</label><textarea name="additional_skills"></textarea></div>
+                    <div class="form-group"><label>Driving Licence Code</label><input type="text" name="drivers_licence"></div>
+                </div>
 
-        <h2>6. References</h2>
-        <p class="help-text" style="margin-bottom: 1rem">
-          Provide two referees. One MUST be your most recent principal or line
-          manager.
-        </p>
-        <div class="section-box" style="margin-top: 0">
-          <h4>Referee 1</h4>
-          <div class="grid-2">
-            <div class="form-group">
-              <label>Name *</label
-              ><input type="text" name="referee_1_name" required />
+                <h2>5. Employment History</h2>
+                <div class="grid-2">
+                    <div class="form-group"><label>Current Employer and Position *</label><input type="text" name="current_employer" required></div>
+                    <div class="form-group"><label>Notice Period *</label><input type="text" name="current_notice_period" required></div>
+                    <div class="form-group"><label>Earliest Start Date *</label><input type="date" name="earliest_start_date" required></div>
+                    <div class="form-group"><label>Salary Expectation (ZAR)</label><input type="number" name="salary_expectation"></div>
+                    <div class="form-group" style="grid-column: 1 / -1;"><label>Employment History (Last 10 Years) *</label><span class="help-text">List employer, role, dates, reason for leaving. Please explain any gaps >3 months.</span><textarea name="employment_history" required></textarea></div>
+                    <div class="form-group" style="grid-column: 1 / -1;"><label>Motivation: Why Covenant?</label><textarea name="motivation"></textarea></div>
+                </div>
+
+                <h2>6. References</h2>
+                <p class="help-text">Provide two referees. One MUST be your most recent principal or line manager.</p>
+                <div class="section-box" style="margin-top: 0;">
+                    <h3 style="margin-top: 0;">Referee 1</h3>
+                    <div class="grid-2">
+                        <div class="form-group"><label>Name *</label><input type="text" name="referee_1_name" required></div>
+                        <div class="form-group"><label>Position and Organisation *</label><input type="text" name="referee_1_position" required></div>
+                        <div class="form-group"><label>Telephone (School Switchboard) *</label><input type="text" name="referee_1_phone" required></div>
+                        <div class="form-group"><label>Email Address *</label><input type="email" name="referee_1_email" required></div>
+                        <div class="form-group" style="grid-column: 1 / -1;"><label>May we contact this referee now? *</label>
+                            <select name="referee_1_permission" required><option value="">Select...</option><option value="Yes">Yes</option><option value="No">No</option></select>
+                        </div>
+                    </div>
+                </div>
+                <div class="section-box">
+                    <h3 style="margin-top: 0;">Referee 2</h3>
+                    <div class="grid-2">
+                        <div class="form-group"><label>Name *</label><input type="text" name="referee_2_name" required></div>
+                        <div class="form-group"><label>Position and Organisation *</label><input type="text" name="referee_2_position" required></div>
+                        <div class="form-group"><label>Telephone *</label><input type="text" name="referee_2_phone" required></div>
+                        <div class="form-group"><label>Email Address *</label><input type="email" name="referee_2_email" required></div>
+                        <div class="form-group" style="grid-column: 1 / -1;"><label>May we contact this referee now? *</label>
+                            <select name="referee_2_permission" required><option value="">Select...</option><option value="Yes">Yes</option><option value="No">No</option></select>
+                        </div>
+                    </div>
+                </div>
+
+                <button type="submit">Submit Employment Application</button>
+            </form>
+            
+            <div id="statusMessage" class="hidden"></div>
+            
+            <div class="center-text" style="margin-top: 3rem;">
+                <a href="index.html" style="color: var(--text-muted); text-decoration: none; font-weight: 500; font-size: 0.9rem;">&larr; Return to Start</a>
             </div>
-            <div class="form-group">
-              <label>Position and Organisation *</label
-              ><input type="text" name="referee_1_position" required />
-            </div>
-            <div class="form-group">
-              <label>Telephone (School Switchboard) *</label
-              ><input type="text" name="referee_1_phone" required />
-            </div>
-            <div class="form-group">
-              <label>Email Address *</label
-              ><input type="email" name="referee_1_email" required />
-            </div>
-            <div class="form-group" style="grid-column: 1 / -1">
-              <label>May we contact this referee now? *</label>
-              <select name="referee_1_permission" required>
-                <option value="">Select...</option>
-                <option value="Yes">Yes</option>
-                <option value="No">No</option>
-              </select>
-            </div>
-          </div>
-        </div>
-        <div class="section-box">
-          <h4>Referee 2</h4>
-          <div class="grid-2">
-            <div class="form-group">
-              <label>Name *</label
-              ><input type="text" name="referee_2_name" required />
-            </div>
-            <div class="form-group">
-              <label>Position and Organisation *</label
-              ><input type="text" name="referee_2_position" required />
-            </div>
-            <div class="form-group">
-              <label>Telephone *</label
-              ><input type="text" name="referee_2_phone" required />
-            </div>
-            <div class="form-group">
-              <label>Email Address *</label
-              ><input type="email" name="referee_2_email" required />
-            </div>
-            <div class="form-group" style="grid-column: 1 / -1">
-              <label>May we contact this referee now? *</label>
-              <select name="referee_2_permission" required>
-                <option value="">Select...</option>
-                <option value="Yes">Yes</option>
-                <option value="No">No</option>
-              </select>
-            </div>
-          </div>
-        </div>
-        <button type="submit">Submit Application</button>
-      </form>
-      <div id="statusMessage" class="hidden"></div>
-      <div class="center-text" style="margin-top: 2rem">
-        <a
-          href="index.html"
-          style="color: var(--primary); text-decoration: none"
-          >← Back to Start</a
-        >
-      </div>
+
+        </main>
+
+        <footer style="text-align: center; margin-top: 2rem; color: rgba(255,255,255,0.6); font-size: 0.85rem; font-family: 'Inter', sans-serif;">
+            <p>&copy; 2026 Covenant Private School. All rights reserved.</p>
+        </footer>
     </div>
+
+    <!-- Attach the shared logic -->
     <script src="js/submit.js"></script>
-  </body>
+</body>
 </html>

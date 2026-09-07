@@ -1,170 +1,250 @@
-:root {
-  --primary: #047857;
-  --primary-hover: #065f46;
-  --background: #f3f4f6;
-  --surface: #ffffff;
-  --text: #1f2937;
-  --border: #d1d5db;
-  --muted: #6b7280;
-}
-body {
-  font-family:
-    system-ui,
-    -apple-system,
-    sans-serif;
-  background: var(--background);
-  color: var(--text);
-  padding: 2rem 1rem;
-  margin: 0;
-  display: flex;
-  justify-content: center;
-}
-.container {
-  background: var(--surface);
-  padding: 2.5rem;
-  border-radius: 12px;
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-  width: 100%;
-  max-width: 900px;
-}
-h1 {
-  margin-top: 0;
-  color: #111827;
-  text-align: center;
-  margin-bottom: 2rem;
-}
-h2 {
-  color: var(--primary);
-  border-bottom: 2px solid var(--primary);
-  padding-bottom: 0.5rem;
-  margin-top: 3rem;
-}
-h3 {
-  margin-top: 2rem;
-  color: #374151;
-}
-.grid-2 {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 1.5rem;
-}
-@media (min-width: 650px) {
-  .grid-2 {
-    grid-template-columns: 1fr 1fr;
-  }
-}
-.form-group {
-  margin-bottom: 1rem;
-}
-label {
-  display: block;
-  margin-bottom: 0.25rem;
-  font-weight: 600;
-  font-size: 0.9rem;
-}
-.help-text {
-  display: block;
-  font-size: 0.75rem;
-  color: var(--muted);
-  margin-bottom: 0.4rem;
-}
-input[type="text"],
-input[type="email"],
-input[type="tel"],
-input[type="number"],
-input[type="date"],
-select,
-textarea {
-  width: 100%;
-  padding: 0.6rem;
-  border: 1px solid var(--border);
-  border-radius: 6px;
-  box-sizing: border-box;
-  font-family: inherit;
-}
-textarea {
-  resize: vertical;
-  min-height: 80px;
-}
-.checkbox-group {
-  display: flex;
-  align-items: flex-start;
-  gap: 0.75rem;
-  margin-bottom: 1rem;
-  background: #f9fafb;
-  padding: 1rem;
-  border-radius: 6px;
-  border: 1px solid var(--border);
-}
-.checkbox-group input {
-  margin-top: 0.25rem;
-  cursor: pointer;
-}
-button {
-  width: 100%;
-  padding: 1.25rem;
-  background: var(--primary);
-  color: white;
-  border: none;
-  border-radius: 6px;
-  font-size: 1.2rem;
-  font-weight: bold;
-  cursor: pointer;
-  margin-top: 3rem;
-  transition: background 0.2s;
-}
-button:hover {
-  background: var(--primary-hover);
-}
-button:disabled {
-  background: #9ca3af;
-  cursor: not-allowed;
-}
-.hidden {
-  display: none;
-}
-#statusMessage {
-  margin-top: 2rem;
-  padding: 1.5rem;
-  border-radius: 6px;
-  text-align: center;
-  font-weight: bold;
-  font-size: 1.1rem;
-}
-.success {
-  background: #dcfce7;
-  color: #166534;
-  border: 1px solid #bbf7d0;
-}
-.error {
-  background: #fee2e2;
-  color: #991b1b;
-  border: 1px solid #fecaca;
-}
-.section-box {
-  background: #fafafa;
-  border: 1px solid #e5e7eb;
-  padding: 1.5rem;
-  border-radius: 8px;
-  margin-top: 1rem;
+/* Import New Premium Fonts: Merriweather (Headings) and Lato (Body) */
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Merriweather:wght@400;700;900&display=swap');
+
+/* Fixes mobile overflow and centering */
+*, *::before, *::after {
+    box-sizing: border-box;
 }
 
+html, body {
+    max-width: 100vw;
+    overflow-x: hidden;
+}
+
+:root { 
+    /* Rich Brand Colors */
+    --navy: #0B1B3D; 
+    --navy-dark: #050c1f;
+    --navy-light: #152b5c;
+    
+    /* Metallic Gold Palette */
+    --gold: #D4AF37; 
+    --gold-light: #F3E5AB;
+    --gold-dark: #AA8C2C;
+    
+    /* UI Colors */
+    --surface: #ffffff; 
+    --text-dark: #111827; 
+    --text-muted: #6b7280; 
+    --border: #e5e7eb; 
+    --input-bg: #f9fafb;
+}
+
+body { 
+    font-family: 'Lato', system-ui, -apple-system, sans-serif; 
+    background: radial-gradient(circle at top center, var(--navy-light) 0%, var(--navy) 40%, var(--navy-dark) 100%);
+    background-attachment: fixed;
+    color: var(--text-dark); 
+    
+    /* MOBILE DEFAULT: Less padding so the form maximizes screen space */
+    padding: 1rem 0.5rem; 
+    margin: 0; 
+    display: flex; 
+    justify-content: center; 
+    line-height: 1.5;
+}
+
+.container { 
+    background: var(--surface); 
+    
+    /* MOBILE DEFAULT: Tighter internal padding */
+    padding: 2rem 1.25rem; 
+    border-radius: 12px; 
+    box-shadow: 0 10px 25px -5px rgba(0,0,0,0.4), 0 0 0 1px rgba(255,255,255,0.05); 
+    width: 100%; 
+    max-width: 900px; 
+    position: relative;
+    overflow: hidden;
+}
+
+/* DESKTOP UPGRADES: Expands layout when viewed on a laptop/tablet */
+@media (min-width: 650px) {
+    body { padding: 3rem 1rem; }
+    .container { padding: 3.5rem 3rem; border-radius: 16px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.05); }
+}
+
+/* Metallic gold accent bar at the top */
+.container::before {
+    content: '';
+    position: absolute;
+    top: 0; 
+    left: 0; 
+    right: 0;
+    height: 8px;
+    background: linear-gradient(90deg, var(--gold-dark) 0%, var(--gold-light) 50%, var(--gold-dark) 100%);
+}
+
+h1, h2, h3, h4 {
+    font-family: 'Merriweather', serif;
+    color: var(--navy);
+}
+
+/* FLUID TYPOGRAPHY: Scales between mobile and desktop */
+h1 { 
+    margin-top: 0; 
+    text-align: center; 
+    margin-bottom: 0.5rem; 
+    font-size: 1.8rem; /* Mobile */
+    letter-spacing: -0.02em;
+}
+
+h2 { 
+    border-bottom: 1px solid var(--border); 
+    padding-bottom: 0.75rem; 
+    margin-top: 3rem; 
+    font-size: 1.4rem; /* Mobile */
+    position: relative;
+}
+
+@media (min-width: 650px) {
+    h1 { font-size: 2.5rem; } /* Desktop */
+    h2 { font-size: 1.75rem; margin-top: 4rem; } /* Desktop */
+}
+
+/* Elegant partial underline for section headers */
+h2::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 60px;
+    height: 2px;
+    background: var(--gold);
+}
+
+h3 { margin-top: 2rem; font-size: 1.2rem; }
+
+/* The Grid System: Stacks on mobile, side-by-side on desktop */
+.grid-2 { display: grid; grid-template-columns: 1fr; gap: 1rem; }
+@media (min-width: 650px) { .grid-2 { grid-template-columns: 1fr 1fr; gap: 2rem 1.5rem; } }
+
+.form-group { margin-bottom: 0.75rem; }
+
+/* Premium Administrative Labels */
+label { 
+    display: block; 
+    margin-bottom: 0.4rem; 
+    font-weight: 700; 
+    font-size: 0.75rem; 
+    color: var(--text-muted); 
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.help-text { display: block; font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.5rem; text-transform: none; letter-spacing: normal;}
+
+/* MOBILE ACCESSIBILITY: Inputs built for touch */
+input[type="text"], input[type="email"], input[type="tel"], input[type="number"], input[type="password"], input[type="date"], select, textarea { 
+    width: 100%; 
+    padding: 0.85rem 1rem; 
+    background-color: var(--input-bg);
+    border: 1px solid var(--border); 
+    border-radius: 8px; 
+    box-sizing: border-box; 
+    font-family: 'Lato', sans-serif; 
+    
+    /* 16px (1rem) minimum size prevents iOS from zooming in when tapped */
+    font-size: 1rem; 
+    color: var(--text-dark);
+    transition: all 0.25s ease;
+    
+    /* Ensures Apple/Google minimum touch target heights (48px) */
+    min-height: 48px;
+}
+
+input:focus, select:focus, textarea:focus {
+    outline: none;
+    background-color: var(--surface);
+    border-color: var(--gold);
+    box-shadow: 0 0 0 4px rgba(212, 175, 55, 0.15);
+}
+
+textarea { resize: vertical; min-height: 120px; }
+
+.checkbox-group { 
+    display: flex; 
+    align-items: flex-start; 
+    gap: 1rem; 
+    margin-bottom: 1.5rem; 
+    background: var(--input-bg); 
+    padding: 1.25rem; 
+    border-radius: 8px; 
+    border: 1px solid var(--border); 
+}
+.checkbox-group input { margin-top: 0.2rem; cursor: pointer; transform: scale(1.2); accent-color: var(--gold); min-width: 20px; min-height: 20px; }
+.checkbox-label { font-weight: 400; font-size: 0.95rem; line-height: 1.5; color: var(--text-dark); text-transform: none; letter-spacing: normal;}
+
+/* Premium Mobile-Friendly Button */
+button { 
+    width: 100%; 
+    padding: 1rem; 
+    min-height: 54px; /* Large, easily tappable area */
+    background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%);
+    color: var(--surface); 
+    border: none; 
+    border-radius: 8px; 
+    font-size: 1.1rem; 
+    font-weight: 700; 
+    letter-spacing: 0.02em;
+    cursor: pointer; 
+    margin-top: 2.5rem; 
+    transition: all 0.3s ease; 
+    font-family: 'Lato', sans-serif;
+    box-shadow: 0 4px 6px -1px rgba(212, 175, 55, 0.2), 0 2px 4px -1px rgba(212, 175, 55, 0.1);
+}
+
+button:hover { 
+    transform: translateY(-2px); 
+    box-shadow: 0 10px 15px -3px rgba(212, 175, 55, 0.3), 0 4px 6px -2px rgba(212, 175, 55, 0.15);
+    background: linear-gradient(135deg, var(--gold-light) 0%, var(--gold) 100%);
+}
+
+button:disabled { background: #d1d5db; color: #9ca3af; cursor: not-allowed; transform: none; box-shadow: none; }
+
+.hidden { display: none; }
+#statusMessage { margin-top: 2rem; padding: 1.5rem; border-radius: 8px; text-align: center; font-weight: 700; font-size: 1.1rem; }
+.success { background: #fefce8; color: #854d0e; border: 1px solid #fef08a; } 
+.error { background: #fee2e2; color: #991b1b; border: 1px solid #fecaca; }
+
 /* Gateway specific */
-.role-btn {
-  display: inline-block;
-  width: auto;
-  padding: 1rem 3rem;
-  margin: 1rem;
-  font-size: 1.2rem;
-  background: white;
-  color: var(--primary);
-  border: 2px solid var(--primary);
-  text-decoration: none;
+.center-text { text-align: center; }
+.role-btn { 
+    display: inline-block; 
+    width: 100%;
+    box-sizing: border-box;
+    max-width: 350px;
+    padding: 1.25rem; 
+    margin: 0.5rem 0; 
+    font-size: 1.1rem; 
+    font-weight: 700;
+    background: var(--surface); 
+    color: var(--navy); 
+    border: 2px solid var(--border); 
+    text-decoration: none;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
 }
-.role-btn:hover {
-  background: var(--primary);
-  color: white;
+
+.role-btn:hover { 
+    border-color: var(--gold);
+    color: var(--gold-dark);
+    box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
+    transform: translateY(-2px);
 }
-.center-text {
-  text-align: center;
+
+@media (min-width: 650px) {
+    .role-btn { margin: 0.75rem; }
+}
+
+.brand-logo {
+    max-width: 140px; /* Slightly smaller for mobile */
+    height: auto;
+    margin: 0 auto 1.5rem auto;
+    display: block;
+    filter: drop-shadow(0 4px 6px rgba(0,0,0,0.15));
+}
+
+@media (min-width: 650px) {
+    .brand-logo { max-width: 160px; }
 }

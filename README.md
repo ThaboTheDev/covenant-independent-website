@@ -1,2 +1,2 @@
-# dynasty-web-starter
-Dynasty Systems Starter Website Repo
+# Covenant Private School Registration Website
+

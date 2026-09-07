@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Stats | Covenant</title>
+    <link rel="stylesheet" href="css/global.css">
+    <style>
+        .stats-wrapper { max-width: 800px; width: 100%; margin: 2rem auto; }
+        
+        /* Two large KPI blocks */
+        .kpi-row { display: flex; gap: 1rem; margin-bottom: 2rem; }
+        .kpi-box { flex: 1; background: white; padding: 2rem; border-radius: 12px; border: 1px solid var(--border); text-align: center; border-top: 4px solid var(--navy); box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+        .kpi-box.gold { border-top-color: var(--gold); }
+        .kpi-box span { font-size: 0.85rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; }
+        .kpi-box h2 { margin: 0.5rem 0 0; font-size: 3.5rem; color: var(--navy); border: none; padding: 0; line-height: 1; }
+        
+        /* Grade Breakdown List */
+        .grade-list { background: white; border-radius: 12px; border: 1px solid var(--border); overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+        .grade-row { display: flex; justify-content: space-between; padding: 1.25rem 2rem; border-bottom: 1px solid var(--border); font-size: 1.1rem; }
+        .grade-row:last-child { border-bottom: none; }
+        .grade-row:nth-child(even) { background-color: var(--input-bg); }
+        .grade-name { font-weight: 700; color: var(--navy); }
+        .grade-count { font-weight: 700; background: var(--gold); color: var(--navy); padding: 0.2rem 1rem; border-radius: 999px; font-size: 1rem; }
+        
+        .login-box { max-width: 400px; margin: 5rem auto; background: white; padding: 2.5rem; border-radius: 12px; text-align: center; }
+    </style>
+</head>
+<body>
+
+<!-- SECURE LOGIN -->
+<div id="loginView" class="login-box container">
+    <img src="img/logo.png" alt="Logo" class="brand-logo">
+    <h2 style="margin-top: 0; border: none;">View Live Stats</h2>
+    <div class="form-group" style="text-align: left; margin-top: 1.5rem;">
+        <label>Secure Passcode</label>
+        <input type="password" id="adminSecretInput" placeholder="Enter access key">
+    </div>
+    <button type="button" id="loginBtn" onclick="authenticate()" style="margin-top: 1rem;">Load Stats</button>
+    <div id="loginError" class="error hidden">Invalid key</div>
+</div>
+
+<!-- STATS DASHBOARD -->
+<div id="dashboardView" class="stats-wrapper hidden">
+    
+    <div style="text-align: center; margin-bottom: 2rem;">
+        <img src="img/logo.png" alt="Logo" style="max-width: 100px; margin-bottom: 1rem;">
+        <h1 style="color: white;">Registration Stats</h1>
+    </div>
+
+    <!-- Totals -->
+    <div class="kpi-row">
+        <div class="kpi-box gold">
+            <span>Total Students</span>
+            <h2 id="totalStudents">0</h2>
+        </div>
+        <div class="kpi-box">
+            <span>Total Teachers</span>
+            <h2 id="totalTeachers">0</h2>
+        </div>
+    </div>
+
+    <!-- Grade Breakdown -->
+    <h2 style="color: white; border: none; text-align: center; margin-bottom: 1rem;">Student Breakdown by Grade</h2>
+    <div class="grade-list" id="gradeListContainer">
+        <!-- Javascript will inject the rows here -->
+        <div class="grade-row">
+            <span class="grade-name">Loading data...</span>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    // ⚠️ MATCH YOUR DEPLOYED API ENDPOINT ⚠️
+    const API_URL = "https://qtq2eftuya.execute-api.eu-north-1.amazonaws.com/admin/registrations";
+
+    async function authenticate() {
+        const key = document.getElementById('adminSecretInput').value.trim();
+        const btn = document.getElementById('loginBtn');
+        const err = document.getElementById('loginError');
+        
+        btn.disabled = true;
+        btn.textContent = "Loading...";
+        err.classList.add('hidden');
+
+        try {
+            const res = await fetch(API_URL, { headers: { 'x-admin-key': key } });
+            if (res.status === 401) throw new Error("Unauthorized");
+            if (!res.ok) throw new Error("Failed to load");
+
+            const data = await res.json();
+            
+            document.getElementById('loginView').classList.add('hidden');
+            document.getElementById('dashboardView').classList.remove('hidden');
+
+            processStats(data.registrations || []);
+        } catch (e) {
+            err.classList.remove('hidden');
+        } finally {
+            btn.disabled = false;
+            btn.textContent = "Load Stats";
+        }
+    }
+
+    function processStats(records) {
+        let students = 0;
+        let teachers = 0;
+        let grades = {};
+
+        records.forEach(r => {
+            const isLearner = (r.pk || '').includes('Learner');
+            
+            if (isLearner) {
+                students++;
+                
+                // Get the string the parent typed for "Current Grade"
+                const currentGradeStr = (r.data.previous_grade || '').trim().toLowerCase();
+                let appliedGrade = "Unspecified / First Year";
+
+                if (currentGradeStr) {
+                    // Extract any numbers from the string
+                    const numberMatch = currentGradeStr.match(/\d+/);
+                    
+                    if (numberMatch) {
+                        // They typed a number (e.g., "7" or "Grade 7"). Add 1.
+                        const nextGrade = parseInt(numberMatch[0], 10) + 1;
+                        appliedGrade = `Grade ${nextGrade}`;
+                    } else if (currentGradeStr.includes('r') || currentGradeStr.includes('rr')) {
+                        // They typed "Grade R" or "RR". Next is Grade 1.
+                        appliedGrade = "Grade 1";
+                    }
+                }
+
+                // Tally it up
+                grades[appliedGrade] = (grades[appliedGrade] || 0) + 1;
+
+            } else {
+                teachers++;
+            }
+        });
+
+        // Update the big numbers
+        document.getElementById('totalStudents').textContent = students;
+        document.getElementById('totalTeachers').textContent = teachers;
+
+        // Sort the grades properly (Grade 1, Grade 2, ... Unspecified at bottom)
+        const sortedGradeKeys = Object.keys(grades).sort((a, b) => {
+            const numA = parseInt((a.match(/\d+/) || [999])[0]);
+            const numB = parseInt((b.match(/\d+/) || [999])[0]);
+            return numA - numB;
+        });
+
+        // Inject into HTML
+        const listContainer = document.getElementById('gradeListContainer');
+        if (sortedGradeKeys.length === 0) {
+            listContainer.innerHTML = `<div class="grade-row"><span class="grade-name" style="color: var(--text-muted);">No students registered yet.</span></div>`;
+            return;
+        }
+
+        listContainer.innerHTML = sortedGradeKeys.map(grade => `
+            <div class="grade-row">
+                <span class="grade-name">${grade}</span>
+                <span class="grade-count">${grades[grade]}</span>
+            </div>
+        `).join('');
+    }
+</script>
+</body>
+</html>

@@ -1,24 +1,33 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
-Description: Streamlined Serverless School Registration Backend (Text Only)
+Description: Covenant Private School Registration Backend
 
 Globals:
   Function:
-    Timeout: 3
-    MemorySize: 256
+    Timeout: 10
     Runtime: python3.14
     Architectures:
       - x86_64
     Environment:
       Variables:
         TABLE_NAME: !Ref RegistrationTable
+        ADMIN_SECRET: "CovenantAdmin2027!"
+  HttpApi:
+    CorsConfiguration:
+      AllowOrigins:
+        - "*"
+      AllowHeaders:
+        - "*"
+      AllowMethods:
+        - "*"
 
 Resources:
-  # 1. Database (On-Demand Capacity for high concurrency)
+  # 1. The Database
   RegistrationTable:
     Type: AWS::DynamoDB::Table
+    DeletionPolicy: Retain
+    UpdateReplacePolicy: Retain
     Properties:
-      TableName: SchoolRegistrations
       BillingMode: PAY_PER_REQUEST
       AttributeDefinitions:
         - AttributeName: pk
@@ -31,21 +40,7 @@ Resources:
         - AttributeName: sk
           KeyType: RANGE
 
-  # 2. HTTP API Gateway (Handles routing and CORS)
-  RegistrationApi:
-    Type: AWS::Serverless::HttpApi
-    Properties:
-      CorsConfiguration:
-        AllowOrigins:
-          - "*"
-        AllowHeaders:
-          - "*"
-        AllowMethods:
-          - POST
-          - OPTIONS
-        MaxAge: 3000
-
-  # 3. The Single Lambda Handler
+  # 2. The API to Submit Registrations
   RegisterFunction:
     Type: AWS::Serverless::Function
     Properties:
@@ -55,14 +50,29 @@ Resources:
         - DynamoDBCrudPolicy:
             TableName: !Ref RegistrationTable
       Events:
-        PostRegistration:
+        ApiEvent:
           Type: HttpApi
           Properties:
-            ApiId: !Ref RegistrationApi
             Path: /register
             Method: POST
 
+  # 3. The API to View the Dashboard
+  GetRegistrationsFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: src/
+      Handler: app.get_registrations_handler
+      Policies:
+        - DynamoDBReadPolicy:
+            TableName: !Ref RegistrationTable
+      Events:
+        ApiEvent:
+          Type: HttpApi
+          Properties:
+            Path: /admin/registrations
+            Method: GET
+
 Outputs:
-  ApiEndpoint:
-    Description: "Your API Base URL for the Frontend"
-    Value: !Sub "https://${RegistrationApi}.execute-api.${AWS::Region}.amazonaws.com"
+  ApiUrl:
+    Description: "Copy this URL to your frontend HTML files!"
+    Value: !Sub "https://${ServerlessHttpApi}.execute-api.${AWS::Region}.amazonaws.com"

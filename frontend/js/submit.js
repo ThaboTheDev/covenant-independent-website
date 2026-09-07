@@ -1,6 +1,6 @@
 // ⚠️ REPLACE THIS WITH YOUR AWS API ENDPOINT ⚠️
 const API_URL =
-  "https://2bnua8vcdh.execute-api.eu-north-1.amazonaws.com/register";
+  "https://qtq2eftuya.execute-api.eu-north-1.amazonaws.com/register";
 
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.querySelector("form");
@@ -45,12 +45,18 @@ document.addEventListener("DOMContentLoaded", () => {
     statusDiv.className = "hidden";
 
     try {
-      const response = await fetch(API_URL, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
-      });
 
+      let retryCount = 0;
+      const maxRetries = 3;
+      let response;
+      do {
+        response = await fetch(API_URL, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(data),
+        });
+        retryCount++;
+      } while (!response.ok && retryCount < maxRetries);
       if (!response.ok) throw new Error("Server rejected the request");
 
       // Success UI
