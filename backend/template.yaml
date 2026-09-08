@@ -12,6 +12,8 @@ Globals:
       Variables:
         TABLE_NAME: !Ref RegistrationTable
         ADMIN_SECRET: "CovenantAdmin2027!"
+        SENDER_EMAIL: "covenantprivateadmin@gmail.com"
+        SENDER_PASSWORD: "gczu bwld khwv xidl"
   HttpApi:
     CorsConfiguration:
       AllowOrigins:
